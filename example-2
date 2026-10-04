@@ -1,0 +1,77 @@
+# question 7
+from pathlib import Path
+import sys
+
+count = 0
+if len(sys.argv) < 2:
+    print("Usage: python3 log_check.py <log_file>")
+    sys.exit(1)
+
+path = Path(sys.argv[1])
+if not path.is_file():
+    print("File not found")
+    sys.exit(1) 
+else:     
+    with open(path,"r") as file:
+        for line in file:
+            if "ERROR" in line:
+                count += 1
+    print("Total errors:", count)
+
+# question 8
+import os
+from pathlib import Path
+
+log = os.getenv("LOG_DIR")
+log_path = Path(log)
+if log_path.is_dir():
+    print("Log directory:", log_path)
+else:
+    print("Log directory not found")
+
+
+# question 10
+with open("/tmp/deployment_status.txt","w") as file:
+    file.write("Deployment completed successfully")
+
+# question 11
+
+from pathlib import Path
+
+path = Path("/tmp/myapp/")
+
+if path.is_dir():
+    print("directory exists")
+else:
+    path.mkdir()    
+
+# question 12
+from pathlib import Path
+source = Path("/tmp/myapp/application.log")
+dest = Path("/tmp/myapp/archive/")
+if not dest.is_dir():
+    dest.mkdir()
+    
+source.rename(dest/source.name)     
+if (dest / source.name).is_file():
+    print("File moved successfully")
+
+# question 13
+from pathlib import Path
+import os
+l = os.getenv("LOG_DIR")
+if l is None:
+    print("LOG_DIR environment variable not set")
+
+l_path = Path(l)
+if l_path.is_dir():
+    print("Log directory:", l_path)
+else:
+    print("LOG directory not found")
+
+
+
+
+
+
+
