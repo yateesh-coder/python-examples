@@ -1,0 +1,76 @@
+from pathlib import Path
+
+path = Path("/var/log/myapp/application.log")
+
+
+if path.exists() and path.is_file():
+    print("Log file exists")
+
+else:
+    print("Log file not found")
+
+# question 2
+
+from pathlib import Path
+
+path = Path("/var/log/myapp/")
+
+if path.exists() :
+    for file in path.glob("*.log"):
+        print(file.name)
+
+
+# question 3
+
+from pathlib import Path
+
+path = Path("/var/log/myapp/application.log")
+if path.is_file():
+    with open(path,"r") as file:
+        for line in file:
+            if "ERROR" in line:
+                print(line)
+
+
+# question 4
+from pathlib import Path
+count = 0
+path = Path("/var/log/myapp/application.log")
+if path.is_file():
+    with open(path,"r") as file:
+        for line in file:
+            if "ERROR" in line:
+                count += 1
+print("Total errors:", count)
+
+# question 5
+from pathlib import Path
+import sys
+
+count = 0
+path = Path(sys.argv[1])
+if path.is_file():
+    with open(path,"r") as file:
+        for line in file:
+            if "ERROR" in line:
+                count += 1
+print("Total errors:", count)
+
+# question 6
+
+from pathlib import Path
+import sys
+
+count = 0
+if len(sys.argv) < 2:
+    print("Usage: python3 log_check.py <log_file>")
+    sys.exit(1)
+    path = Path(sys.argv[1])
+    if path.is_file():
+        with open(path,"r") as file:
+            for line in file:
+                if "ERROR" in line:
+                    count += 1
+    print("Total errors:", count)
+
+
