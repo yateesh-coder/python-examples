@@ -99,3 +99,33 @@ url = "https://example.com/api/deployments"
 response=requests.get(url,headers={"Authorization": f"Bearer {tok}"})
 print("staus code:", response.status_code)
 print("Response Body", response.text)
+
+
+
+import requests
+url = "https://example.com/api/deployments"
+response = requests.get(url)
+a = response.status_code
+if a == 200:
+    print("Deployment API: SUCCESS")
+elif a == 401:
+    print("Deployment API: AUTHENTICATION FAILED")
+elif a == 403:
+    print("Deployment API: ACCESS DENIED")
+elif a == 500:
+    print("Deployment API: SERVER ERROR")
+else:
+    print("Deployment API: UNKNOWN ERROR")    
+
+#----------------------------------------
+import sys
+a = sys.argv[1]
+b = list(a)
+c = b[::-1]
+    if c == b:
+        print('pallindrome')
+    else:
+        print('not pallindrome')
+..................................
+
+
