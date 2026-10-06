@@ -1,0 +1,125 @@
+File handling:
+
+with open("filename", "mode") as file:
+Once Python leaves the with block, the file is automatically closed.
+
+with open("sample.txt", "r") as file:
+  data = file.read()
+  print(data)
+
+with open("sample.txt","r") as file:
+ for line in file:
+   print(line)
+
+lines = file.readlines()
+    print(lines)   --> all lines as a List
+............................................... ....
+
+with open("sample1.txt", "w") as file:
+  file.write("Hello world")
+
+The old content was overwritten.
+
+with open("file.txt", "a") as file:
+    file.write("New content")
+........................................................................
+
+
+comparison to shell
+
+grep "ERROR" app.log
+
+with open("file3.txt", "r") as file:
+ for line in file:
+   if "ERROR" in line:
+     print(line.strip())
+
+
+case insensistive:   if "error" in line.lower():  -> converts line to lower case
+grep -v "INFO" app.log  -> if "INFO" not in line:
+
+grep "ERROR" app.log | grep "database" -> if "ERROR" in line and "database" in line.lower():
+.......................................................................
+
+regular expression uses re module
+
+import re
+re.search(pattern,line)  = first match
+re.findall()  = all matching values are get
+
+import re
+with open("app.log", "r") as file:
+ for line in file:
+    if re.search("ERROR", line):
+	print(line.strip())
+.................................................................
+
+awk:
+line.split()
+
+awk '{print $2}' servers.txt
+
+Python:
+
+with open("servers.txt", "r") as file:
+    for line in file:
+        fields = line.split()
+        print(fields[1])
+
+awk       Python
+
+$1   →    [0]
+$2   →    [1]
+$3   →    [2]
+
+awk '$3 == "stopped" {print $1}' servers.txt
+
+with open("servers.txt", "r") as file:
+    for line in file:
+        fields = line.split()
+
+        if fields[2] == "stopped":
+            print(fields[0])
+................................................
+
+import psutil
+
+for process in psutil.process_iter(['pid', 'ppid', 'username', 'name']):
+    if process.info['name'] == 'java':
+        print(process.info)
+
+
+import psutil
+
+for process in psutil.process_iter(['pid', 'name', 'cpu_percent']):
+    if process.info['cpu_percent'] >= 80:
+        print(process.info, "exceeded CPU threshold")
+...............................................................
+
+
+response = requests.get("https://example.com")
+
+print(response.status_code)
+print(response.text)
+print(response.content)
+print(response.headers)
+print(response.url)
+print(response.ok)
+print(response.reason)
+
+and the response will be
+┌─────────────────────────────────┐
+│          HTTP RESPONSE           │
+├─────────────────────────────────┤
+│ status_code → 200               │
+│ text        → response body     │
+│ content     → raw bytes         │
+│ headers     → response metadata │
+│ url         → final URL         │
+│ ok          → True/False        │
+│ reason      → "OK"              │
+└─────────────────────────────────┘
+
+
+
+ 
